@@ -13,12 +13,12 @@ jobs:
 
   steps:
     - task: GoTool@0
-      input: 
+      inputs: 
         version: 1.14
 
-    - task: CmdLine@2
-      scripts: |
-        cd $ {{ parameters.workspace }}
-        go test ./...
+    - inputs:
+        script: |
+          cd $ {{ parameters.workspace }}
+          go test ./...
 
 
