@@ -16,10 +16,8 @@ jobs:
       inputs: 
         version: 1.14
 
-    - task: CmdLine@2
-      inputs:
-        script: |
-          cd $ {{ parameters.workspace }}
-          go test ./...
+    - script: |
+        cd $ {{ parameters.workspace }}
+        go test ./...
 
 
