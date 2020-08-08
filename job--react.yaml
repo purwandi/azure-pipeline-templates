@@ -1,0 +1,23 @@
+parameters:
+  os: linux
+  workspace: .
+
+jobs:
+- job: ${{ format(parameters.os, parameters.name) }}
+
+  pool:
+    ${{ if eq(parameters.os, 'linux') }}:
+      vmImage: ubuntu-20.04
+    ${{ if eq(parameters.os, 'macos') }}:
+      vmImage: macOS-10.14
+
+  steps:
+    - task: NodeTool@0
+      input: 
+        versionSpec: '12.x' 
+
+    - task: CmdLine@2
+      scripts: |
+        npm install -g eslint
+
+

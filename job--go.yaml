@@ -1,0 +1,24 @@
+parameters:
+  os: linux
+  workspace: .
+
+jobs:
+- job: ${{ format(parameters.os, parameters.name) }}
+
+  pool:
+    ${{ if eq(parameters.os, 'linux') }}:
+      vmImage: ubuntu-20.04
+    ${{ if eq(parameters.os, 'macos') }}:
+      vmImage: macOS-10.14
+
+  steps:
+    - task: GoTool@0
+      input: 
+        version: 1.14
+
+    - task: CmdLine@2
+      scripts: |
+        cd $ {{ parameters.workspace }}
+        go test ./...
+
+
